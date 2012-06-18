@@ -214,4 +214,5 @@ int main(int argc, char ** argv)
 	g_debug("[building] done");
 
 	_g_ir_parser_free (parser);
+	return 0;
 }

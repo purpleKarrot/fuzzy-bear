@@ -125,3 +125,35 @@ add_executable(generate
 target_link_libraries(generate
   gir
   )
+
+
+#file(GLOB gir_files
+#  /usr/share/gir-1.0/*.gir
+#  )
+
+set(gir_files
+  /usr/share/gir-1.0/Gio-2.0.gir
+  /usr/share/gir-1.0/GLib-2.0.gir
+  /usr/share/gir-1.0/GObject-2.0.gir
+  /usr/share/gir-1.0/GIRepository-2.0.gir
+  /usr/share/gir-1.0/Peas-1.0.gir
+  /usr/share/gir-1.0/Soup-2.4.gir
+  )
+
+
+set(header_output)
+foreach(file ${gir_files})
+  get_filename_component(name "${file}" NAME)
+  string(REGEX REPLACE "-.*" "" name "${name}")
+  string(REGEX REPLACE "([a-z])([A-Z])" "\\1_\\2" name "${name}")
+  string(TOLOWER "${name}" name)
+  set(output "${Tools_SOURCE_DIR}/include/${name}.hpp")
+  add_custom_command(OUTPUT "${output}"
+    COMMAND "$<TARGET_FILE:compiler>" -o "${output}" "${file}"
+    )
+  list(APPEND header_output "${output}")
+endforeach(file)
+
+add_custom_target(headers ALL
+  DEPENDS ${header_output}
+  )
