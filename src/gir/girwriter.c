@@ -635,13 +635,11 @@ write_struct_info (const gchar  *namespace,
 
   if (g_base_info_get_type ((GIBaseInfo *)info) == GI_INFO_TYPE_BOXED)
     {
-      xml_start_element (file, "glib:boxed");
-      xml_printf (file, " glib:name=\"%s\"", name);
+      fprintf(file->file, "struct %s //boxed\n{\n", name);
     }
   else
     {
-      xml_start_element (file, "record");
-      xml_printf (file, " name=\"%s\"", name);
+      fprintf(file->file, "struct %s\n{\n", name);
     }
 
   if (type_name != NULL)
@@ -683,7 +681,7 @@ write_struct_info (const gchar  *namespace,
 
     }
 
-  xml_end_element_unchecked (file);
+  fprintf(file->file, "};\n");
 }
 
 static void
@@ -1330,14 +1328,7 @@ gir_writer_write (const char *filename,
 
       version = g_irepository_get_version (repository, ns);
 
-      shared_library = g_irepository_get_shared_library (repository, ns);
-      c_prefix = g_irepository_get_c_prefix (repository, ns);
-      xml_start_element (xml, "namespace");
-      xml_printf (xml, " name=\"%s\" version=\"%s\"", ns, version);
-      if (shared_library)
-        xml_printf (xml, " shared-library=\"%s\"", shared_library);
-      if (c_prefix)
-        xml_printf (xml, " c:prefix=\"%s\"", c_prefix);
+      fprintf(xml->file, "namespace %s\n{\n", ns);
 
       n_infos = g_irepository_get_n_infos (repository, ns);
       for (j = 0; j < n_infos; j++)
@@ -1386,7 +1377,7 @@ gir_writer_write (const char *filename,
           g_base_info_unref (info);
         }
 
-      xml_end_element (xml, "namespace");
+      fprintf(xml->file, "} // namespace %s\n", ns);
     }
 
   xml_end_element (xml, "repository");

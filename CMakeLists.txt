@@ -46,6 +46,7 @@ set(typelib_files
   /usr/lib/girepository-1.0/Gio-2.0.typelib
   /usr/lib/girepository-1.0/GLib-2.0.typelib
   /usr/lib/girepository-1.0/GObject-2.0.typelib
+  /usr/lib/girepository-1.0/GModule-2.0.typelib
   /usr/lib/girepository-1.0/GIRepository-2.0.typelib
   /usr/lib/girepository-1.0/Peas-1.0.typelib
   /usr/lib/girepository-1.0/Soup-2.4.typelib
