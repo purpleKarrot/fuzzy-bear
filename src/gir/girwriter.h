@@ -22,6 +22,8 @@
 #ifndef __GIRWRITER_H__
 #define __GIRWRITER_H__
 
+#include <glib.h>
+
 void gir_writer_write (const char *filename,
                        const char *namespace,
                        gboolean    needs_prefix,

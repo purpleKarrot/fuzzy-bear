@@ -26,7 +26,6 @@
 #include <gmodule.h>
 
 #include "gir/girwriter.h"
-#include "gir/gitypelib-internal.h"
 
 int main(int argc, char *argv[])
 {
