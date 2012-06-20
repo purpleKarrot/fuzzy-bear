@@ -30,6 +30,25 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 add_executable(generate
   src/gir/girwriter.c
   src/gir/girwriter.h
+  src/gir/girxml.c
+  src/gir/girxml.h
+
+  src/gir/callable_info.c
+  src/gir/callback_info.c
+  src/gir/constant_info.c
+  src/gir/constant_value.c
+  src/gir/enum_info.c
+  src/gir/field_info.c
+  src/gir/function_info.c
+  src/gir/interface_info.c
+  src/gir/object_info.c
+  src/gir/property_info.c
+  src/gir/signal_info.c
+  src/gir/struct_info.c
+  src/gir/type_info.c
+  src/gir/union_info.c
+  src/gir/value_info.c
+  src/gir/vfunc_info.c
   src/generate.c
   )
 
